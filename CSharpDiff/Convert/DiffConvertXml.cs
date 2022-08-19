@@ -14,7 +14,7 @@ namespace CSharpDiff.Convert
         {
 
             var ret = new List<string>();
-            for (var i = 0; i < changes.Count(); i++)
+            for (var i = 0; i < changes.Count; i++)
             {
                 var change = changes.ElementAt(i);
                 if (change.added == true)

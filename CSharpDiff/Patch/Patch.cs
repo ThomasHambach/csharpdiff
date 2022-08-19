@@ -1,22 +1,10 @@
 using System.Text.RegularExpressions;
+using CSharpDiff.Diff;
+using CSharpDiff.Diff.Models;
+using CSharpDiff.Patch.Models;
 
-namespace CSharpDiff
+namespace CSharpDiff.Patch
 {
-    public class PatchServiceOptions
-    {
-        public int Context { get; set; } = 4;
-    }
-
-    public class PatchResult
-    {
-        public string OldFileName { get; set; }
-        public string NewFileName { get; set; }
-        public string OldHeader { get; set; }
-        public string NewHeader { get; set; }
-        public IEnumerable<Hunk> Hunks { get; set; }
-    };
-
-
     public class Patch
     {
         public string[] contextLines(string[] lines)
@@ -24,7 +12,7 @@ namespace CSharpDiff
             return lines.Select((entry) => { return ' ' + entry; }).ToArray();
         }
 
-        public PatchResult CreateStructuredPatch(string oldFileName, string newFileName, string newStr, string oldStr, string oldHeader, string newHeader, PatchServiceOptions options)
+        public PatchResult CreateStructuredPatch(string oldFileName, string newFileName, string newStr, string oldStr, string oldHeader, string newHeader, PatchOptions options)
         {
             var df = new DiffLines();
             var diff = df.diff(oldStr, newStr);

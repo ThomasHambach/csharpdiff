@@ -1,8 +1,10 @@
 # CSharpDiff
 
-C# Diff with Unified Diff Support, this codebase is a port from the popular JS library JSDiff.
+C# Diff with Unified Diff Support, this codebase is a port from the popular JS library [jsdiff](https://github.com/kpdecker/jsdiff) by [kpdecker](https://github.com/kpdecker).
 
-The only functionality implied at this time is the unified diff. Everything is guaranteed to be a bit buggy.
+## Warning
+
+*The only functionality implemented at this time is the unified diff. Everything is guaranteed to be a bit buggy.*
 
 ## Usage Example
 
@@ -18,10 +20,17 @@ var patch = ps.CreateStructuredPatch("filename1", "filename2", text1, text2, "",
 var patch = ps.formatPatch(patch);
 ```
 
+### Works Well With
+
+* [Diff2HTML](https://diff2html.xyz/)
+
 ## Todo
 
-- [] Clean-up code
-- [] Unit tests
-- [] Support word based diff
-- [] Port patch apply
+- [ ] Clean-up code
+- [ ] Unit tests
+- [ ] Support word based diff
+- [ ] Port patch apply
 
+## Contributing
+
+Idk, just make a pull request.

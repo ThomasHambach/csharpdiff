@@ -12,50 +12,55 @@ namespace CSharpDiff.Tests
             var diff = new DiffLines();
             var diffResult = diff.diff("line\nold value\nline", "line\nnew value\nline");
             var converted = DiffConvertXml.Convert(diffResult);
-            Assert.Equal("line\n<ins>old value\n</ins><del>new value\n</del>line", converted);
+            Assert.Equal("line\n<del>old value\n</del><ins>new value\n</ins>line", converted);
         }
 
-        // it('should diff lines', function() {
-        //     const diffResult = diffLines(
-        //       'line\nold value\nline',
-        //       'line\nnew value\nline');
-        //     expect(convertChangesToXML(diffResult)).to.equal('line\n<del>old value\n</del><ins>new value\n</ins>line');
-        // });
-        // it('should the same lines in diff', function() {
-        //     const diffResult = diffLines(
-        //       'line\nvalue\nline',
-        //       'line\nvalue\nline');
-        //     expect(convertChangesToXML(diffResult)).to.equal('line\nvalue\nline');
-        // });
+        [Fact]
+        public void ShouldDiffTheSameLines()
+        {
+            var diff = new DiffLines();
+            var diffResult = diff.diff("line\nvalue\nline", "line\nvalue\nline");
+            var converted = DiffConvertXml.Convert(diffResult);
+            Assert.Equal("line\nvalue\nline", converted);
+        }
 
-        // it('should handle leading and trailing whitespace', function() {
-        //     const diffResult = diffLines(
-        //       'line\nvalue \nline',
-        //       'line\nvalue\nline');
-        //     expect(convertChangesToXML(diffResult)).to.equal('line\n<del>value \n</del><ins>value\n</ins>line');
-        // });
+        [Fact]
+        public void ShouldHandleTrailingSpaces()
+        {
+            var diff = new DiffLines();
+            var diffResult = diff.diff("line\nvalue \nline", "line\nvalue\nline");
+            var converted = DiffConvertXml.Convert(diffResult);
+            Assert.Equal("line\n<del>value \n</del><ins>value\n</ins>line", converted);
+        }
 
-        // it('should handle windows line endings', function() {
-        //     const diffResult = diffLines(
-        //       'line\r\nold value \r\nline',
-        //       'line\r\nnew value\r\nline');
-        //     expect(convertChangesToXML(diffResult)).to.equal('line\r\n<del>old value \r\n</del><ins>new value\r\n</ins>line');
-        // });
+        [Fact]
+        public void ShouldHandleWindowsLineEndings()
+        {
+            var diff = new DiffLines();
+            var diffResult = diff.diff("line\r\nold value\r\nline", "line\r\nnew value\r\nline");
+            var converted = DiffConvertXml.Convert(diffResult);
+            Assert.Equal("line\r\n<del>old value\r\n</del><ins>new value\r\n</ins>line", converted);
+        }
 
-        // it('should handle empty lines', function() {
-        //     const diffResult = diffLines(
-        //       'line\n\nold value \n\nline',
-        //       'line\n\nnew value\n\nline');
-        //     expect(convertChangesToXML(diffResult)).to.equal('line\n\n<del>old value \n</del><ins>new value\n</ins>\nline');
-        // });
+        [Fact]
+        public void ShouldHandleEmptyLines()
+        {
+            var diff = new DiffLines();
+            var diffResult = diff.diff("line\n\nold value \n\nline", "line\n\nnew value\n\nline");
+            var converted = DiffConvertXml.Convert(diffResult);
+            Assert.Equal("line\n\n<del>old value \n</del><ins>new value\n</ins>\nline", converted);
+        }
 
-        // it('should handle empty input', function() {
-        //     const diffResult = diffLines(
-        //       'line\n\nold value \n\nline',
-        //       '');
-        //     expect(convertChangesToXML(diffResult)).to.equal('<del>line\n\nold value \n\nline</del>');
-        // });
+        [Fact]
+        public void ShouldHandleEmptyInput()
+        {
+            var diff = new DiffLines();
+            var diffResult = diff.diff("line\n\nold value \n\nline", "");
+            var converted = DiffConvertXml.Convert(diffResult);
+            Assert.Equal("<del>line\n\nold value \n\nline</del>", converted);
+        }
 
+        // @todo Support maxEditLength.
         // describe('given options.maxEditLength', function() {
         //     it('terminates early', function() {
         //         const diffResult = diffLines(

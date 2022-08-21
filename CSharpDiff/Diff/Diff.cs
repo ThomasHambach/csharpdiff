@@ -6,6 +6,7 @@ namespace CSharpDiff.Diff
     public class Diff
     {
         public bool UseLongestToken { get; set; } = true;
+        public bool IgnoreWhiteSpace { get; set; } = false;
 
         public IList<DiffResult> diff(string oldString, string newString)
         {
@@ -23,7 +24,7 @@ namespace CSharpDiff.Diff
             var editLength = 1;
             var maxEditLength = newLen + oldLen;
 
-            var bestPath = new Dictionary<int, BestPath>();
+            var bestPath = new Dictionary<int, BestPath?>();
             bestPath.Add(0, new BestPath
             {
                 newPos = -1
@@ -45,7 +46,7 @@ namespace CSharpDiff.Diff
                 for (var diagonalPath = dPath; diagonalPath <= editLength; diagonalPath += 2)
                 {
                     BestPath basePath;
-                    Console.WriteLine(diagonalPath);
+                    // Console.WriteLine(diagonalPath);
                     var addPath = bestPath.ContainsKey(diagonalPath - 1) ? bestPath[diagonalPath - 1] : null;
                     var removePath = bestPath.ContainsKey(diagonalPath + 1) ? bestPath[diagonalPath + 1] : null;
                     oldPos = (removePath != null ? removePath.newPos : 0) - diagonalPath;
@@ -129,47 +130,59 @@ namespace CSharpDiff.Diff
             for (; componentPos < componentLen; componentPos++)
             {
                 var component = components[componentPos];
-                if (component.removed != null)
+                var whereToTake = newPos + (int)component.count;
+                var whereToTakeOld = oldPos + (int)component.count;
+                if (component.removed != true)
                 {
                     if (component.added != null && useLongestToken)
                     {
-                        var value = newString.Skip(newPos).Take(newPos + (int)component.count);
+                        var value = newString[newPos..whereToTakeOld];
                         value = value.Select((value, i) =>
                         {
                             var oldValue = oldString[oldPos + i];
                             // @todo wtf is this
-                            return oldValue;
-                            // return oldValue.Length > value.Length ? oldValue : value;
-                        });
+                            // return oldValue;
+                            return oldValue.Length > value.Length ? oldValue : value;
+                        }).ToArray();
 
                         component.value = join(value.ToArray());
                     }
                     else
                     {
-                        component.value = join(newString.Skip(newPos).Take(newPos + (int)component.count).ToArray());
+                        component.value = join(newString[newPos..whereToTakeOld]);
                     }
 
                     newPos += (int)component.count;
 
                     // Common case
-                    if (component.added == null || component.added == false)
+                    if (component.added != true)
                     {
                         oldPos += (int)component.count;
                     }
                 }
                 else
                 {
-                    component.value = join(oldString.Skip(oldPos).Take(oldPos + (int)component.count).ToArray());
+                    component.value = join(oldString[oldPos..whereToTakeOld]);
                     oldPos += (int)component.count;
 
                     // Reverse add and remove so removes are output first to match common convention
                     // The diffing algorithm is tied to add then remove output and this is the simplest
                     // route to get the desired output with minimal overhead.
-                    if (componentPos > 0 && components[componentPos - 1].added == true)
+                    var prev = componentPos > 0 ? components.ElementAt(componentPos - 1) : null;
+                    if (prev != null && prev.added == true)
                     {
-                        var tmp = components[componentPos - 1];
-                        components[componentPos - 1] = components[componentPos];
-                        components[componentPos] = tmp;
+                        var tmp = components[componentPos];
+
+                        components.RemoveAt(componentPos);
+                        components.RemoveAt(componentPos - 1);
+
+                        components.Insert(componentPos - 1, tmp);
+                        components.Insert(componentPos, prev);
+
+
+                        var x = 1;
+                        // components[componentPos - 1] = components[componentPos];
+                        // components[componentPos] = tmp;
                     }
                 }
             }

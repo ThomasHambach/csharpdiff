@@ -35,7 +35,10 @@ namespace CSharpDiff.Diff
                 }
                 else
                 {
-                    line = line.Trim();
+                    if (IgnoreWhiteSpace)
+                    {
+                        line = line.Trim();
+                    }
                     retLines.Add(line);
                 }
             }

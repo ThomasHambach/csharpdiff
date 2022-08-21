@@ -17,9 +17,7 @@ var text1 = "";
 var text2 = "";
 
 var ps = new Patch();
-var ds = new Diff();
-var patch = ps.CreateStructuredPatch("filename1", "filename2", text1, text2, "", "", new PatchServiceOptions());
-var patch = ps.formatPatch(patch);
+string patch = ps.create("filename1", "filename2", text1, text2, "header1", "header2", new PatchServiceOptions());
 ```
 
 ### Works Well With

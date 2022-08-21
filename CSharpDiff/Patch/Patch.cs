@@ -5,14 +5,20 @@ using CSharpDiff.Patch.Models;
 
 namespace CSharpDiff.Patch
 {
-    public class Patch
+    public class Patch : IPatch
     {
         public string[] contextLines(string[] lines)
         {
             return lines.Select((entry) => { return ' ' + entry; }).ToArray();
         }
 
-        public PatchResult CreateStructuredPatch(string oldFileName, string newFileName, string newStr, string oldStr, string oldHeader, string newHeader, PatchOptions options)
+        public string create(string oldFileName, string newFileName, string newStr, string oldStr, string oldHeader, string newHeader, PatchOptions options)
+        {
+            var result = createPatchResult(oldFileName, newFileName, newStr, oldStr, oldHeader, newHeader, options);
+            return formatPatch(result);
+        }
+
+        public PatchResult createPatchResult(string oldFileName, string newFileName, string newStr, string oldStr, string oldHeader, string newHeader, PatchOptions options)
         {
             var df = new DiffLines();
             var diff = df.diff(oldStr, newStr);

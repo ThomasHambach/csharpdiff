@@ -16,10 +16,10 @@ jobs:
           dotnet-version: 6.0.x
 
       - name: Build binaries
-        run: dotnet build -c Release src/CSharpDiff/CSharpDiff.csproj
+        run: dotnet build -c Release CSharpDiff/CSharpDiff.csproj
 
       - name: Creating a package
-        run: dotnet pack --no-build -c Release src/CSharpDiff/CSharpDiff.csproj -o .
+        run: dotnet pack --no-build -c Release CSharpDiff/CSharpDiff.csproj -o .
 
       - name: Publish to Nuget 
         run: dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_KEY}} --skip-duplicate -n 

@@ -5,7 +5,7 @@ on:
       - main
 jobs:
   build:
-    name: SonarScanner
+    name: Publish on Nuget
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2

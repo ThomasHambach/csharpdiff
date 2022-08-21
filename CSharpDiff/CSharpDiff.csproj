@@ -4,14 +4,18 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <PackageId>CSharpDiff</PackageId>
-    <Version>0.0.2</Version>
+    <Version>0.0.3</Version>
     <Authors>ThomasHambach</Authors>
     <Description>
       Unified Diff support for .NET. Based on the popular library JSDIFF.
     </Description>
     <PackageTags>Diff;UniDiff;Line Diff;Unified Diff</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>..\README.md</PackageReadmeFile>
     
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
 </Project>

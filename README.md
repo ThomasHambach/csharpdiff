@@ -1,4 +1,4 @@
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ThomasHambach_csharpdiff&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ThomasHambach_csharpdiff)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ThomasHambach_csharpdiff&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ThomasHambach_csharpdiff) [![NuGet](https://img.shields.io/nuget/v/CSharpDiff.svg)](https://www.nuget.org/packages/CSharpDiff) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![GitHub contributors](https://img.shields.io/github/contributors/thomashambach/csharpdiff.svg)](https://github.com/thomashambach/csharpdiff/graphs/contributors)
 
 # CSharpDiff
 

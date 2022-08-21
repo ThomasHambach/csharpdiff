@@ -2,6 +2,11 @@ namespace CSharpDiff.Diff.Models
 {
     public class Hunk
     {
+        public Hunk()
+        {
+            lines = new List<string>().ToArray();
+        }
+
         public int oldStart { get; set; }
         public int oldLines { get; set; }
         public int newStart { get; set; }

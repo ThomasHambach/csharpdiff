@@ -21,7 +21,7 @@ var text1 = "Here im. Rock you like old man.";
 var text2 = "Here im. Rock you like hurricane.";
 
 var diff = new DiffSentence();
-string patch = diff.diff(text1, text2);
+var difference = diff.diff(text1, text2);
 ```
 
 ### Patch

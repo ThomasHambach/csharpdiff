@@ -1,0 +1,17 @@
+name: Nuget Publish
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: SonarScanner
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: publish on version change
+        id: publish_nuget
+        uses: brandedoutcast/publish-nuget@v2
+        with:
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: CSharpDiff/CSharpDiff.csproj

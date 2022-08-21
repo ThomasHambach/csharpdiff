@@ -15,3 +15,4 @@ jobs:
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: CSharpDiff/CSharpDiff.csproj
+          NUGET_KEY: ${{secrets.NUGET_KEY}}

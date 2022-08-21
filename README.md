@@ -1,4 +1,4 @@
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ThomasHambach_csharpdiff&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ThomasHambach_csharpdiff) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ThomasHambach_csharpdiff&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ThomasHambach_csharpdiff)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ThomasHambach_csharpdiff&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ThomasHambach_csharpdiff)
 
 # CSharpDiff
 
@@ -26,10 +26,24 @@ string patch = ps.create("filename1", "filename2", text1, text2, "header1", "hea
 
 ## Todo
 
-- [ ] Clean-up code
-- [ ] Unit tests
-- [ ] Support word based diff
-- [ ] Port patch apply
+- [ ] Clean-up code (Code smells and bugs according to Sonar)
+- [ ] Patch
+  - [x] Create
+  - [ ] Apply
+  - [ ] Merge
+  - [ ] Parse
+- [ ] Diff
+  - [ ] Array
+  - [x] Base
+  - [ ] Character
+  - [ ] CSS
+  - [ ] JSON
+  - [x] Line
+  - [ ] Sentence
+  - [ ] Word
+- [ ] Convert
+  - [x] XML
+  - [ ] DMP
 
 ## Contributing
 

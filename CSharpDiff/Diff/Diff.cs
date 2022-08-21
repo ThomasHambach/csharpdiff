@@ -3,7 +3,7 @@ using CSharpDiff.Diff.Models;
 
 namespace CSharpDiff.Diff
 {
-    public class Diff
+    public class Diff : IDiff
     {
         public bool UseLongestToken { get; set; } = true;
         public bool IgnoreWhiteSpace { get; set; } = false;
@@ -12,10 +12,10 @@ namespace CSharpDiff.Diff
         {
             var cleanOldString = removeEmpty(tokenize(oldString));
             var cleanNewString = removeEmpty(tokenize(newString));
-            return determineDiff(oldString, newString, cleanOldString, cleanNewString);
+            return determineDiff(cleanOldString, cleanNewString);
         }
 
-        public IList<DiffResult> determineDiff(string oldString, string newString, string[] cleanOldString, string[] cleanNewString)
+        public IList<DiffResult> determineDiff(string[] cleanOldString, string[] cleanNewString)
         {
 
             var diffs = new List<DiffResult>();

@@ -10,11 +10,29 @@ C# Diff with Unified Diff Support, this codebase is a port from the popular JS l
 
 ## Usage Example
 
-```c#
-using CSharpDiff;
+### Diff
 
-var text1 = "";
-var text2 = "";
+#### Sentence
+
+```c#
+using CSharpDiff.Diff;
+
+var text1 = "Here im. Rock you like old man.";
+var text2 = "Here im. Rock you like hurricane.";
+
+var diff = new DiffSentence();
+string patch = diff.diff(text1, text2);
+```
+
+### Patch
+
+#### Create
+
+```c#
+using CSharpDiff.Patch;
+
+var text1 = "...";
+var text2 = "...";
 
 var ps = new Patch();
 string patch = ps.create("filename1", "filename2", text1, text2, "header1", "header2", new PatchServiceOptions());
@@ -33,13 +51,13 @@ string patch = ps.create("filename1", "filename2", text1, text2, "header1", "hea
   - [ ] Merge
   - [ ] Parse
 - [ ] Diff
-  - [ ] Array
+  - [ ] Array (difficult, JS allows type mixing)
   - [x] Base
   - [ ] Character
   - [ ] CSS
   - [ ] JSON
   - [x] Line
-  - [ ] Sentence
+  - [x] Sentence
   - [ ] Word
 - [ ] Convert
   - [x] XML

@@ -8,7 +8,7 @@ namespace CSharpDiff.Diff
         {
             var cleanOldString = removeEmpty(tokenize(oldString));
             var cleanNewString = removeEmpty(tokenize(newString));
-            return determineDiff(oldString, newString, cleanOldString, cleanNewString);
+            return determineDiff(cleanOldString, cleanNewString);
         }
 
         public new string[] tokenize(string value)

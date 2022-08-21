@@ -9,11 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      # Publish
-      - name: publish on version change
-        id: publish_nuget
-        uses: alirezanet/publish-nuget@v3.0.0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
         with:
-          # Filepath of the project to be packaged, relative to root of repository
-          PROJECT_FILE_PATH: CSharpDiff/CSharpDiff.csproj
-          NUGET_KEY: ${{secrets.NUGET_KEY}}
+          dotnet-version: 6.0.x
+
+      - name: Build binaries
+        run: dotnet build -c Release src/CSharpDiff/CSharpDiff.csproj
+
+      - name: Creating a package
+        run: dotnet pack --no-build -c Release src/CSharpDiff/CSharpDiff.csproj -o .
+
+      - name: Publish to Nuget 
+        run: dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_KEY}} --skip-duplicate -n 

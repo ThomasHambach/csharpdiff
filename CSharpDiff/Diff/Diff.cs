@@ -30,8 +30,9 @@ namespace CSharpDiff.Diff
                 newPos = -1
             });
 
-            var oldPos = extractCommon(bestPath[0], cleanNewString, cleanOldString, 0);
-            if (bestPath[0].newPos + 1 >= newLen && oldPos + 1 >= oldLen)
+            BestPath oldPosPath = bestPath.GetValueOrDefault(0) != null ? bestPath[0] : new BestPath();
+            var oldPos = extractCommon(oldPosPath, cleanNewString, cleanOldString, 0);
+            if (oldPosPath.newPos + 1 >= newLen && oldPos + 1 >= oldLen)
             {
                 diffs.Add(new DiffResult
                 {
@@ -46,7 +47,7 @@ namespace CSharpDiff.Diff
                 for (var diagonalPath = dPath; diagonalPath <= editLength; diagonalPath += 2)
                 {
                     BestPath basePath;
-                    // Console.WriteLine(diagonalPath);
+
                     var addPath = bestPath.ContainsKey(diagonalPath - 1) ? bestPath[diagonalPath - 1] : null;
                     var removePath = bestPath.ContainsKey(diagonalPath + 1) ? bestPath[diagonalPath + 1] : null;
                     oldPos = (removePath != null ? removePath.newPos : 0) - diagonalPath;
@@ -76,14 +77,16 @@ namespace CSharpDiff.Diff
                     // Select the diagonal that we want to branch from. We select the prior
                     // path whose position in the new string is the farthest from the origin
                     // and does not pass the bounds of the diff graph
-                    if (!canAdd || (canRemove && addPath.newPos < removePath.newPos))
+                    if (!canAdd && removePath != null || (canRemove && addPath != null && removePath != null && addPath.newPos < removePath.newPos))
                     {
                         basePath = clonePath(removePath);
                         basePath.components = pushComponent(basePath.components, null, true);
                     }
                     else
                     {
-                        basePath = addPath; // No need to clone, we've pulled it from the list
+                        // No need to clone, we've pulled it from the list
+                        // Note that C# complains here if we don't do the if, but it's not the best way of handling.
+                        basePath = addPath != null ? addPath : new BestPath();
                         basePath.newPos++;
                         basePath.components = pushComponent(basePath.components, true, null);
                     }
@@ -178,11 +181,6 @@ namespace CSharpDiff.Diff
 
                         components.Insert(componentPos - 1, tmp);
                         components.Insert(componentPos, prev);
-
-
-                        var x = 1;
-                        // components[componentPos - 1] = components[componentPos];
-                        // components[componentPos] = tmp;
                     }
                 }
             }

@@ -11,7 +11,7 @@
     </Description>
     <PackageTags>Diff;UniDiff;Line Diff;Unified Diff</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageReadmeFile>..\README.md</PackageReadmeFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     
   </PropertyGroup>
   <ItemGroup>

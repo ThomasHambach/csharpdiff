@@ -1,9 +1,9 @@
 using System.Text.RegularExpressions;
-using CSharpDiff.Diff;
-using CSharpDiff.Diff.Models;
-using CSharpDiff.Patch.Models;
+using CSharpDiff.Diffs;
+using CSharpDiff.Diffs.Models;
+using CSharpDiff.Patches.Models;
 
-namespace CSharpDiff.Patch
+namespace CSharpDiff.Patches
 {
     public class Patch : IPatch
     {

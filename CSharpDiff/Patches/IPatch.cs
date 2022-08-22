@@ -1,6 +1,6 @@
-using CSharpDiff.Patch.Models;
+using CSharpDiff.Patches.Models;
 
-namespace CSharpDiff.Patch
+namespace CSharpDiff.Patches
 {
     public interface IPatch
     {

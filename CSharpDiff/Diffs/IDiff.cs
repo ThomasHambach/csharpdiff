@@ -1,16 +1,9 @@
-using CSharpDiff.Diff.Models;
+using CSharpDiff.Diffs.Models;
 
-namespace CSharpDiff.Diff
+namespace CSharpDiff.Diffs
 {
     public interface IDiff
     {
-        bool UseLongestToken { get; set; }
-
-        /// <summary>
-        /// Defines whether we ignore white space.
-        /// </summary>
-        bool IgnoreWhiteSpace { get; set; }
-
         List<DiffResult> buildValues(List<DiffResult> components, string[] newString, string[] oldString, bool useLongestToken);
 
         BestPath clonePath(BestPath path);
@@ -18,14 +11,6 @@ namespace CSharpDiff.Diff
         IList<DiffResult> determineDiff(string[] cleanOldString, string[] cleanNewString);
 
         IList<DiffResult> diff(string oldString, string newString);
-
-        /// <summary>
-        /// Check whether left matches right.
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        bool equals(char left, char right);
 
         /// <summary>
         /// Check whether left matches right.

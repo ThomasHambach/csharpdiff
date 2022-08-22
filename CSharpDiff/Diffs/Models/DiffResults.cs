@@ -1,4 +1,4 @@
-namespace CSharpDiff.Diff.Models
+namespace CSharpDiff.Diffs.Models
 {
     public class DiffResult
     {

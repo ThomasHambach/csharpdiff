@@ -1,12 +1,21 @@
 ﻿using System.Text.RegularExpressions;
-using CSharpDiff.Diff.Models;
+using CSharpDiff.Diffs.Models;
 
-namespace CSharpDiff.Diff
+namespace CSharpDiff.Diffs
 {
     public class Diff : IDiff
     {
-        public bool UseLongestToken { get; set; } = true;
-        public bool IgnoreWhiteSpace { get; set; } = false;
+        public Diff()
+        {
+            Options = new DiffOptions();
+        }
+
+        public Diff(DiffOptions options)
+        {
+            Options = options;
+        }
+
+        public DiffOptions Options { get; set; }
 
         public IList<DiffResult> diff(string oldString, string newString)
         {
@@ -152,7 +161,7 @@ namespace CSharpDiff.Diff
                     }
                     else
                     {
-                        component.value = join(newString[newPos..whereToTakeOld]);
+                        component.value = join(newString[newPos..whereToTake]);
                     }
 
                     newPos += (int)component.count;
@@ -279,14 +288,9 @@ namespace CSharpDiff.Diff
             return oldPos;
         }
 
-        public bool equals(char left, char right)
-        {
-            return left == right;
-        }
-
         public bool equals(string left, string right)
         {
-            return left == right;
+            return String.Compare(left, right, Options.IgnoreCase) == 0;
         }
     }
 

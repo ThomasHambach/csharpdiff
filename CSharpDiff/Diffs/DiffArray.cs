@@ -1,6 +1,6 @@
-using CSharpDiff.Diff.Models;
+using CSharpDiff.Diffs.Models;
 
-namespace CSharpDiff.Diff
+namespace CSharpDiff.Diffs
 {
     public class DiffArray : Diff
     {

@@ -1,6 +1,6 @@
-using CSharpDiff.Diff.Models;
+using CSharpDiff.Diffs.Models;
 
-namespace CSharpDiff.Patch.Models
+namespace CSharpDiff.Patches.Models
 {
     public class PatchResult
     {

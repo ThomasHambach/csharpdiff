@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
-using CSharpDiff.Diff.Models;
-namespace CSharpDiff.Diff
+using CSharpDiff.Diffs.Models;
+namespace CSharpDiff.Diffs
 {
     public class DiffLines : Diff
     {
@@ -35,7 +35,7 @@ namespace CSharpDiff.Diff
                 }
                 else
                 {
-                    if (IgnoreWhiteSpace)
+                    if (Options.IgnoreWhiteSpace)
                     {
                         line = line.Trim();
                     }

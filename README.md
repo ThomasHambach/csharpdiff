@@ -12,6 +12,28 @@ C# Diff with Unified Diff Support, this codebase is a port from the popular JS l
 
 ### Diff
 
+#### Character
+
+```c#
+var diff = new Diff(new DiffOptions
+{
+    IgnoreCase = true
+});
+var result = diff.diff("New Value.", "New value.");
+```
+
+#### Line
+
+```c#
+using CSharpDiff.Diff;
+
+var text1 = "Here im.\nRock you like old man.\nYeah";
+var text2 = "Here im.\nRock you like hurricane.\nYeah";
+
+var diff = new DiffLines();
+var difference = diff.diff(text1, text2);
+```
+
 #### Sentence
 
 ```c#
@@ -53,7 +75,7 @@ string patch = ps.create("filename1", "filename2", text1, text2, "header1", "hea
 - [ ] Diff
   - [ ] Array (difficult, JS allows type mixing)
   - [x] Base
-  - [ ] Character
+  - [x] Character
   - [ ] CSS
   - [ ] JSON
   - [x] Line

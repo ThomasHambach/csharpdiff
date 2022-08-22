@@ -1,4 +1,4 @@
-namespace CSharpDiff.Patch.Models
+namespace CSharpDiff.Patches.Models
 {
     public class PatchOptions
     {

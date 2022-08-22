@@ -1,5 +1,5 @@
-using CSharpDiff.Convert;
-using CSharpDiff.Diff;
+using CSharpDiff.Converters;
+using CSharpDiff.Diffs;
 
 namespace CSharpDiff.Tests
 {

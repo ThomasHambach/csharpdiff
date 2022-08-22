@@ -1,7 +1,7 @@
 using System.Web;
-using CSharpDiff.Diff.Models;
+using CSharpDiff.Diffs.Models;
 
-namespace CSharpDiff.Convert
+namespace CSharpDiff.Converters
 {
     public static class DiffConvertXml
     {

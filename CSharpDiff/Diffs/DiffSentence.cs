@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
-using CSharpDiff.Diff.Models;
+using CSharpDiff.Diffs.Models;
 
-namespace CSharpDiff.Diff
+namespace CSharpDiff.Diffs
 {
     public class DiffSentence : Diff
     {

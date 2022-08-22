@@ -11,7 +11,7 @@ namespace CSharpDiff.Tests
         {
             var diff = new DiffLines();
             var diffResult = diff.diff("line\nold value\nline", "line\nnew value\nline");
-            var converted = DiffConvertXml.Convert(diffResult);
+            var converted = DiffConvert.ToXml(diffResult);
             Assert.Equal("line\n<del>old value\n</del><ins>new value\n</ins>line", converted);
         }
 
@@ -20,7 +20,7 @@ namespace CSharpDiff.Tests
         {
             var diff = new DiffLines();
             var diffResult = diff.diff("line\nvalue\nline", "line\nvalue\nline");
-            var converted = DiffConvertXml.Convert(diffResult);
+            var converted = DiffConvert.ToXml(diffResult);
             Assert.Equal("line\nvalue\nline", converted);
         }
 
@@ -29,7 +29,7 @@ namespace CSharpDiff.Tests
         {
             var diff = new DiffLines();
             var diffResult = diff.diff("line\nvalue \nline", "line\nvalue\nline");
-            var converted = DiffConvertXml.Convert(diffResult);
+            var converted = DiffConvert.ToXml(diffResult);
             Assert.Equal("line\n<del>value \n</del><ins>value\n</ins>line", converted);
         }
 
@@ -38,7 +38,7 @@ namespace CSharpDiff.Tests
         {
             var diff = new DiffLines();
             var diffResult = diff.diff("line\r\nold value\r\nline", "line\r\nnew value\r\nline");
-            var converted = DiffConvertXml.Convert(diffResult);
+            var converted = DiffConvert.ToXml(diffResult);
             Assert.Equal("line\r\n<del>old value\r\n</del><ins>new value\r\n</ins>line", converted);
         }
 
@@ -47,7 +47,7 @@ namespace CSharpDiff.Tests
         {
             var diff = new DiffLines();
             var diffResult = diff.diff("line\n\nold value \n\nline", "line\n\nnew value\n\nline");
-            var converted = DiffConvertXml.Convert(diffResult);
+            var converted = DiffConvert.ToXml(diffResult);
             Assert.Equal("line\n\n<del>old value \n</del><ins>new value\n</ins>\nline", converted);
         }
 
@@ -56,7 +56,7 @@ namespace CSharpDiff.Tests
         {
             var diff = new DiffLines();
             var diffResult = diff.diff("line\n\nold value \n\nline", "");
-            var converted = DiffConvertXml.Convert(diffResult);
+            var converted = DiffConvert.ToXml(diffResult);
             Assert.Equal("<del>line\n\nold value \n\nline</del>", converted);
         }
 

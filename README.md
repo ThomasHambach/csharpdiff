@@ -4,9 +4,26 @@
 
 C# Diff with Unified Diff Support, this codebase is a port from the popular JS library [jsdiff](https://github.com/kpdecker/jsdiff) by [kpdecker](https://github.com/kpdecker).
 
-## Warning
+## Todo
 
-*The only functionality implemented at this time is the unified diff. Everything is guaranteed to be a bit buggy.*
+- [ ] Clean-up code (Code smells and bugs according to Sonar)
+- [ ] Patch
+  - [x] Create
+  - [ ] Apply
+  - [ ] Merge
+  - [ ] Parse
+- [ ] Diff
+  - [ ] Array
+  - [x] Base `Diff()`
+  - [x] Character `Diff()`
+  - [ ] CSS
+  - [ ] JSON
+  - [x] Line `DiffLines()`
+  - [x] Sentence `DiffSentence()`
+  - [ ] Word (Partial, issues with Regex in `DiffWord.Tokenize`)
+- [x] Convert `DiffConvert`
+  - [x] XML `DiffConvert.ToXml`
+  - [x] DMP (diff-match-patch) `DiffConvert.ToDmp`
 
 ## Usage Example
 
@@ -65,27 +82,6 @@ string patch = ps.create("filename1", "filename2", text1, text2, "header1", "hea
 ### Works Well With
 
 * [Diff2HTML](https://diff2html.xyz/)
-
-## Todo
-
-- [ ] Clean-up code (Code smells and bugs according to Sonar)
-- [ ] Patch
-  - [x] Create
-  - [ ] Apply
-  - [ ] Merge
-  - [ ] Parse
-- [ ] Diff
-  - [ ] Array (difficult, JS allows type mixing)
-  - [x] Base
-  - [x] Character
-  - [ ] CSS
-  - [ ] JSON
-  - [x] Line
-  - [x] Sentence
-  - [ ] Word (Partial, issues with Regex in `DiffWord.Tokenize`)
-- [ ] Convert
-  - [x] XML
-  - [ ] DMP
 
 ## Contributing
 

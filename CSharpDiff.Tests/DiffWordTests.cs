@@ -11,7 +11,7 @@ namespace CSharpDiff.Tests
         {
             var diff = new DiffWord();
             var diffResult = diff.diff("New Value", "New  ValueMoreData");
-            var converted = DiffConvertXml.Convert(diffResult);
+            var converted = DiffConvert.ToXml(diffResult);
             Assert.Equal("New  <del>Value</del><ins>ValueMoreData</ins>", converted);
         }
 
@@ -20,7 +20,7 @@ namespace CSharpDiff.Tests
         {
             var diff = new DiffWord();
             var diffResult = diff.diff("New Value  ", "New  ValueMoreData ");
-            var converted = DiffConvertXml.Convert(diffResult);
+            var converted = DiffConvert.ToXml(diffResult);
             Assert.Equal("New  <del>Value</del><ins>ValueMoreData</ins> ", converted);
         }
 
@@ -30,7 +30,7 @@ namespace CSharpDiff.Tests
         {
             var diff = new DiffWord();
             var diffResult = diff.diff("New :Value:Test", "New  ValueMoreData ");
-            var converted = DiffConvertXml.Convert(diffResult);
+            var converted = DiffConvert.ToXml(diffResult);
             Assert.Equal("New  <del>:Value:Test</del><ins>ValueMoreData </ins>", converted);
 
             // @todo Tests below still bug out due to the REGEX in DiffWord.Tokenize

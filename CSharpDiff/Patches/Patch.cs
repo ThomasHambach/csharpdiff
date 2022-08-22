@@ -33,6 +33,21 @@ namespace CSharpDiff.Patches
             return lines.Select((entry) => { return ' ' + entry; }).ToArray();
         }
 
+        public string create(string filename, string oldStr, string newStr)
+        {
+            return create(filename, filename, oldStr, newStr, null, null);
+        }
+
+        public string create(string oldFileName, string newFileName, string oldStr, string newStr)
+        {
+            return create(oldFileName, newFileName, oldStr, newStr, null, null);
+        }
+
+        public string create(string filename, string oldStr, string newStr, string oldHeader, string newHeader)
+        {
+            return create(filename, filename, oldStr, newStr, oldHeader, newHeader);
+        }
+
         public string create(string oldFileName, string newFileName, string oldStr, string newStr, string oldHeader, string newHeader)
         {
             var result = createPatchResult(oldFileName, newFileName, oldStr, newStr, oldHeader, newHeader);

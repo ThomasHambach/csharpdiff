@@ -9,6 +9,36 @@ namespace CSharpDiff.Patches
         /// <summary>
         /// Create a text version of a unified diff patch.
         /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="oldStr"></param>
+        /// <param name="newStr"></param>
+        /// <returns></returns>
+        string create(string filename, string oldStr, string newStr);
+
+        /// <summary>
+        /// Create a text version of a unified diff patch.
+        /// </summary>
+        /// <param name="oldFileName"></param>
+        /// <param name="newFileName"></param>
+        /// <param name="oldStr"></param>
+        /// <param name="newStr"></param>
+        /// <returns></returns>
+        string create(string oldFileName, string newFileName, string oldStr, string newStr);
+
+        /// <summary>
+        /// Create a text version of a unified diff patch.
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="oldStr"></param>
+        /// <param name="newStr"></param>
+        /// <param name="oldHeader"></param>
+        /// <param name="newHeader"></param>
+        /// <returns></returns>
+        string create(string filename, string oldStr, string newStr, string oldHeader, string newHeader);
+
+        /// <summary>
+        /// Create a text version of a unified diff patch.
+        /// </summary>
         /// <param name="oldFileName"></param>
         /// <param name="newFileName"></param>
         /// <param name="oldStr"></param>

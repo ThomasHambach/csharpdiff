@@ -11,7 +11,7 @@ namespace CSharpDiff.Tests
         {
             var diff = new DiffSentence();
             var diffResult = diff.diff("New Value.", "New ValueMoreData.");
-            var converted = DiffConvertXml.Convert(diffResult);
+            var converted = DiffConvert.ToXml(diffResult);
             Assert.Equal("<del>New Value.</del><ins>New ValueMoreData.</ins>", converted);
         }
 
@@ -20,7 +20,7 @@ namespace CSharpDiff.Tests
         {
             var diff = new DiffSentence();
             var diffResult = diff.diff("Here im. Rock you like old man.", "Here im. Rock you like hurricane.");
-            var converted = DiffConvertXml.Convert(diffResult);
+            var converted = DiffConvert.ToXml(diffResult);
             Assert.Equal("Here im. <del>Rock you like old man.</del><ins>Rock you like hurricane.</ins>", converted);
         }
     }

@@ -11,7 +11,7 @@ namespace CSharpDiff.Tests
         {
             var diff = new Diff();
             var result = diff.diff("New Value.", "New ValueMoreData.");
-            Assert.Equal("New Value<ins>MoreData</ins>.", DiffConvertXml.Convert(result));
+            Assert.Equal("New Value<ins>MoreData</ins>.", DiffConvert.ToXml(result));
         }
 
         [Fact]
@@ -22,7 +22,7 @@ namespace CSharpDiff.Tests
                 IgnoreCase = true
             });
             var result = diff.diff("New Value.", "New value.");
-            Assert.Equal("New value.", DiffConvertXml.Convert(result));
+            Assert.Equal("New value.", DiffConvert.ToXml(result));
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace CSharpDiff.Tests
                 IgnoreCase = true
             });
             var result = diff.diff("New Values.", "New value.");
-            Assert.Equal("New value<del>s</del>.", DiffConvertXml.Convert(result));
+            Assert.Equal("New value<del>s</del>.", DiffConvert.ToXml(result));
         }
     }
 }

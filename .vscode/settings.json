@@ -4,5 +4,7 @@
         "source.fixAll": false,
         "source.organizeImports": true,
         "source.sortMembers": true
-    }
+    },
+    "editor.formatOnSave": true,
+    "omnisharp.enableImportCompletion": true
 }

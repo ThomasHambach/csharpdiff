@@ -1,4 +1,4 @@
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ThomasHambach_csharpdiff&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ThomasHambach_csharpdiff) [![NuGet](https://img.shields.io/nuget/v/CSharpDiff.svg)](https://www.nuget.org/packages/CSharpDiff) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![GitHub contributors](https://img.shields.io/github/contributors/thomashambach/csharpdiff.svg)](https://github.com/thomashambach/csharpdiff/graphs/contributors)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ThomasHambach_csharpdiff&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ThomasHambach_csharpdiff) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ThomasHambach_csharpdiff&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ThomasHambach_csharpdiff) [![NuGet](https://img.shields.io/nuget/v/CSharpDiff.svg)](https://www.nuget.org/packages/CSharpDiff) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![GitHub contributors](https://img.shields.io/github/contributors/thomashambach/csharpdiff.svg)](https://github.com/thomashambach/csharpdiff/graphs/contributors) 
 
 # CSharpDiff
 
@@ -15,6 +15,8 @@ C# Diff with Unified Diff Support, this codebase is a port from the popular JS l
 #### Character
 
 ```c#
+using CSharpDiff.Diff;
+
 var diff = new Diff(new DiffOptions
 {
     IgnoreCase = true
@@ -57,7 +59,7 @@ var text1 = "...";
 var text2 = "...";
 
 var ps = new Patch();
-string patch = ps.create("filename1", "filename2", text1, text2, "header1", "header2", new PatchServiceOptions());
+string patch = ps.create("filename1", "filename2", text1, text2, "header1", "header2", new PatchOptions());
 ```
 
 ### Works Well With
@@ -80,7 +82,7 @@ string patch = ps.create("filename1", "filename2", text1, text2, "header1", "hea
   - [ ] JSON
   - [x] Line
   - [x] Sentence
-  - [ ] Word
+  - [ ] Word (Partial, issues with Regex in `DiffWord.Tokenize`)
 - [ ] Convert
   - [x] XML
   - [ ] DMP

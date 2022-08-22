@@ -13,5 +13,6 @@ namespace CSharpDiff.Diffs.Models
         public bool? added { get; set; }
         public bool? removed { get; set; }
         public string[] lines { get; set; }
+        public bool hasLines { get; set; } = false;
     }
 }

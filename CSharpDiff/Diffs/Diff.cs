@@ -237,7 +237,7 @@ namespace CSharpDiff.Diffs
             };
         }
 
-        public string[] tokenize(string value)
+        public virtual string[] tokenize(string value)
         {
             return value.ToCharArray().Select(c => c.ToString()).ToArray();
         }
@@ -288,7 +288,7 @@ namespace CSharpDiff.Diffs
             return oldPos;
         }
 
-        public bool equals(string left, string right)
+        public virtual bool equals(string left, string right)
         {
             return String.Compare(left, right, Options.IgnoreCase) == 0;
         }

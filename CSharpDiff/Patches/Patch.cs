@@ -7,24 +7,46 @@ namespace CSharpDiff.Patches
 {
     public class Patch : IPatch
     {
+        private readonly PatchOptions Options;
+        private readonly DiffOptions DiffOptions;
+
+        public Patch()
+        {
+            Options = new PatchOptions();
+            DiffOptions = new DiffOptions();
+        }
+
+        public Patch(PatchOptions options)
+        {
+            Options = options;
+            DiffOptions = new DiffOptions();
+        }
+
+        public Patch(PatchOptions options, DiffOptions diffOptions)
+        {
+            Options = options;
+            DiffOptions = diffOptions;
+        }
+
         public string[] contextLines(string[] lines)
         {
             return lines.Select((entry) => { return ' ' + entry; }).ToArray();
         }
 
-        public string create(string oldFileName, string newFileName, string newStr, string oldStr, string oldHeader, string newHeader, PatchOptions options)
+        public string create(string oldFileName, string newFileName, string oldStr, string newStr, string oldHeader, string newHeader)
         {
-            var result = createPatchResult(oldFileName, newFileName, newStr, oldStr, oldHeader, newHeader, options);
+            var result = createPatchResult(oldFileName, newFileName, oldStr, newStr, oldHeader, newHeader);
             return formatPatch(result);
         }
 
-        public PatchResult createPatchResult(string oldFileName, string newFileName, string newStr, string oldStr, string oldHeader, string newHeader, PatchOptions options)
+        public PatchResult createPatchResult(string oldFileName, string newFileName, string oldStr, string newStr, string oldHeader, string newHeader)
         {
-            var df = new DiffLines();
+            var df = new DiffLines(DiffOptions);
             var diff = df.diff(oldStr, newStr);
             diff.Add(new DiffResult
             {
-                value = ""
+                value = "",
+                hasLines = true,
             });
 
             var hunks = new List<Hunk>();
@@ -37,11 +59,10 @@ namespace CSharpDiff.Patches
             {
                 var current = diff[i];
                 var currentLines = new Hunk();
-                var lines = Regex.Replace(current.value, "\n$", "").Split("\n");
-                // @todo idk
-                // var lines = current.lines || current.value.replace(/\n$/, '').split('\n');
+                var lines = current.hasLines ? current.lines : Regex.Replace(current.value, "\n$", "").Split("\n");
                 currentLines.lines = lines;
                 diff[i].lines = lines;
+                diff[i].hasLines = true;
 
                 if (current.added == true || current.removed == true)
                 {
@@ -54,17 +75,14 @@ namespace CSharpDiff.Patches
 
                         if (prev != null)
                         {
-                            // @todo what does this do
-                            var takenLines = prev.lines.TakeLast(options.Context);
-                            curRange = options.Context > 0 ? contextLines(takenLines.ToArray()).ToList() : new List<string>();
-                            // curRange = new List<string>();
+                            var takenLines = prev.lines.TakeLast(Options.Context);
+                            curRange = Options.Context > 0 ? contextLines(takenLines.ToArray()).ToList() : new List<string>();
                             oldRangeStart -= curRange.Count();
                             newRangeStart -= curRange.Count();
                         }
                     }
 
                     // Output our changes
-
                     curRange.AddRange(lines.Select((entry) =>
                     {
                         return (current.added == true ? '+' : '-') + entry;
@@ -88,7 +106,7 @@ namespace CSharpDiff.Patches
                     if (oldRangeStart > 0)
                     {
                         // Close out any changes that have been output (or join overlapping)
-                        if (lines.Length <= options.Context * 2 && i < diff.Count() - 2)
+                        if (lines.Length <= Options.Context * 2 && i < diff.Count() - 2)
                         {
                             // Overlapping
                             curRange.AddRange(contextLines(lines));
@@ -96,7 +114,7 @@ namespace CSharpDiff.Patches
                         else
                         {
                             // end the range and output
-                            var contextSize = Math.Min(lines.Length, options.Context);
+                            var contextSize = Math.Min(lines.Length, Options.Context);
                             var takenLines = lines.Skip(0).Take(contextSize);
                             curRange.AddRange(contextLines(takenLines.ToArray()));
 
@@ -109,7 +127,7 @@ namespace CSharpDiff.Patches
                                 lines = curRange.ToArray()
                             };
 
-                            if (i >= diff.Count() - 2 && lines.Length <= options.Context)
+                            if (i >= diff.Count() - 2 && lines.Length <= Options.Context)
                             {
                                 // EOF is inside this hunk
                                 var oldEOFNewline = Regex.IsMatch(oldStr, "\n$");
@@ -157,8 +175,8 @@ namespace CSharpDiff.Patches
                 ret.Add("Index: " + diff.OldFileName);
             }
             ret.Add("===================================================================");
-            ret.Add("--- " + diff.OldFileName + '\t' + diff.OldHeader);
-            ret.Add("+++ " + diff.NewFileName + '\t' + diff.NewHeader);
+            ret.Add("--- " + diff.OldFileName + (String.IsNullOrEmpty(diff.OldHeader) ? "" : '\t' + diff.OldHeader));
+            ret.Add("+++ " + diff.NewFileName + (String.IsNullOrEmpty(diff.NewHeader) ? "" : '\t' + diff.NewHeader));
 
             for (var i = 0; i < diff.Hunks.Count(); i++)
             {

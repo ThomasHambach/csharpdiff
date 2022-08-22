@@ -11,26 +11,26 @@ namespace CSharpDiff.Patches
         /// </summary>
         /// <param name="oldFileName"></param>
         /// <param name="newFileName"></param>
-        /// <param name="newStr"></param>
         /// <param name="oldStr"></param>
+        /// <param name="newStr"></param>
         /// <param name="oldHeader"></param>
         /// <param name="newHeader"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        string create(string oldFileName, string newFileName, string newStr, string oldStr, string oldHeader, string newHeader, PatchOptions options);
+        string create(string oldFileName, string newFileName, string oldStr, string newStr, string oldHeader, string newHeader);
 
         /// <summary>
         /// Create object of PatchResult that can be consumed by `formatPatch` to create a unified diff.
         /// </summary>
         /// <param name="oldFileName"></param>
         /// <param name="newFileName"></param>
-        /// <param name="newStr"></param>
         /// <param name="oldStr"></param>
+        /// <param name="newStr"></param>
         /// <param name="oldHeader"></param>
         /// <param name="newHeader"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        PatchResult createPatchResult(string oldFileName, string newFileName, string newStr, string oldStr, string oldHeader, string newHeader, PatchOptions options);
+        PatchResult createPatchResult(string oldFileName, string newFileName, string oldStr, string newStr, string oldHeader, string newHeader);
 
         /// <summary>
         /// Format to unified diff patch using PatchResult

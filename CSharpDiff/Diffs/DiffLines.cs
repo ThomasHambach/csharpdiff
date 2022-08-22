@@ -4,14 +4,15 @@ namespace CSharpDiff.Diffs
 {
     public class DiffLines : Diff
     {
-        public new IList<DiffResult> diff(string oldString, string newString)
+        public DiffLines() : base()
         {
-            var cleanOldString = removeEmpty(tokenize(oldString));
-            var cleanNewString = removeEmpty(tokenize(newString));
-            return determineDiff(cleanOldString, cleanNewString);
         }
 
-        public new string[] tokenize(string value)
+        public DiffLines(DiffOptions options) : base(options)
+        {
+        }
+
+        public override string[] tokenize(string value)
         {
             var retLines = new List<string>();
             var regex = new Regex("(\n|\r\n)");
@@ -27,9 +28,7 @@ namespace CSharpDiff.Diffs
             for (var i = 0; i < linesAndNewlines.Count(); i++)
             {
                 var line = linesAndNewlines[i];
-
-                // if (i % 2 && !this.options.newlineIsToken)
-                if (i % 2 == 1)
+                if (i % 2 == 1 && Options.NewlineIsToken == false)
                 {
                     retLines[retLines.Count() - 1] += line;
                 }

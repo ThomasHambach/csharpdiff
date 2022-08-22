@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <PackageId>CSharpDiff</PackageId>
-    <Version>0.0.5</Version>
+    <Version>0.0.6</Version>
     <Authors>ThomasHambach</Authors>
     <Description>
       Unified Diff support for .NET. Based on the popular library JSDIFF.

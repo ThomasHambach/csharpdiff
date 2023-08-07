@@ -483,5 +483,36 @@ namespace CSharpDiff.Tests
             Assert.Equal(expected, res);
         }
 
+    [Fact]
+    public void ShouldApplyPatchCorrectly()
+    {
+        var patchApply = new PatchApply();
+        var source = "Hello, World!";
+        var patch = "-Hello\n+Goodbye";
+        var expected = "Goodbye, World!";
+        var result = patchApply.Apply(source, patch);
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void ShouldHandleEmptyPatch()
+    {
+        var patchApply = new PatchApply();
+        var source = "Hello, World!";
+        var patch = "";
+        var expected = "Hello, World!";
+        var result = patchApply.Apply(source, patch);
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void ShouldHandleEmptySourceString()
+    {
+        var patchApply = new PatchApply();
+        var source = "";
+        var patch = "+Hello, World!";
+        var expected = "Hello, World!";
+        var result = patchApply.Apply(source, patch);
+        Assert.Equal(expected, result);
     }
 }

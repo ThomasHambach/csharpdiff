@@ -52,5 +52,5 @@ namespace CSharpDiff.Patches
                     lines[change.Position] = change.Text;
                     break;
             }
-            
-            }
+            return String.Join("\n", lines);
+        }

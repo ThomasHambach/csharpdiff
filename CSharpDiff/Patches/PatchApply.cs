@@ -45,17 +45,15 @@ namespace CSharpDiff.Patches
                     lines[change.Position] = change.Text;
                     break;
             }
-            return string.Join('\n', lines);
-        }
-    }
-
-    public class Change
-    {
-        public string Operation { get; set; }
-        public int Position { get; set; }
-        public string Text { get; set; }
-    }
-}
-        }
-    }
-}
+            public class PatchApply
+            {
+            // PatchApply class code...
+            }
+            
+            public class Change
+            {
+            public string Operation { get; set; }
+            public int Position { get; set; }
+            public string Text { get; set; }
+            }
+            }

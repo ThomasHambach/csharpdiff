@@ -79,6 +79,19 @@ var ps = new Patch();
 string patch = ps.create("filename1", "filename2", text1, text2, "header1", "header2", new PatchOptions());
 ```
 
+#### Apply
+
+The `Apply` method in the `PatchApply` class applies a patch to a given source string. Here is an example of how to use it:
+
+```c#
+using CSharpDiff.Patches;
+
+var patchApply = new PatchApply();
+var source = "Hello, World!";
+var patch = "-Hello\n+Goodbye";
+var result = patchApply.Apply(source, patch);
+```
+
 ### Works Well With
 
 * [Diff2HTML](https://diff2html.xyz/)

@@ -12,6 +12,13 @@ namespace CSharpDiff.Patches
             return source;
         }
 
+        public class Change
+        {
+            public string Operation { get; set; }
+            public int Position { get; set; }
+            public string Text { get; set; }
+        }
+
         private List<Change> ParseUnifiedDiff(string uniDiff)
         {
             var lines = uniDiff.Split('\n');
@@ -45,15 +52,5 @@ namespace CSharpDiff.Patches
                     lines[change.Position] = change.Text;
                     break;
             }
-            public class PatchApply
-            {
-            // PatchApply class code...
-            }
             
-            public class Change
-            {
-            public string Operation { get; set; }
-            public int Position { get; set; }
-            public string Text { get; set; }
-            }
             }

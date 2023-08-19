@@ -516,3 +516,4 @@ namespace CSharpDiff.Tests
         Assert.Equal(expected, result);
     }
 }
+}

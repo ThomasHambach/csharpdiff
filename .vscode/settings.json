@@ -6,5 +6,5 @@
         "source.sortMembers": true
     },
     "editor.formatOnSave": true,
-    "omnisharp.enableImportCompletion": true
+    "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true
 }

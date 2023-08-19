@@ -54,3 +54,5 @@ namespace CSharpDiff.Patches
             }
             return String.Join("\n", lines);
         }
+    }
+}

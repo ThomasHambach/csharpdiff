@@ -86,8 +86,8 @@ namespace CSharpDiff.Tests
         {
             var patch = new Patch();
 
-            var expected = "Index: test\n"
-                            + "===================================================================\n"
+            var expected = "diff --git test test\n"
+                            + "Index: test\n"
                             + "--- test\theader1\n"
                             + "+++ test\theader2\n"
                             + "@@ -1,3 +1,4 @@\n"
@@ -98,8 +98,8 @@ namespace CSharpDiff.Tests
             var res = patch.create("test", "test", "line2\nline3\nline5\n", "line2\nline3\nline4\nline5\n", "header1", "header2");
             Assert.Equal(expected, res);
 
-            expected = "Index: test\n"
-                        + "===================================================================\n"
+            expected = "diff --git test test\n"
+                        + "Index: test\n"
                         + "--- test\theader1\n"
                         + "+++ test\theader2\n"
                         + "@@ -1,3 +1,4 @@\n"
@@ -111,8 +111,8 @@ namespace CSharpDiff.Tests
             res = patch.create("test", "test", "line2\nline3\nline4\n", "line2\nline3\nline4\nline5\n", "header1", "header2");
             Assert.Equal(expected, res);
 
-            expected = "Index: test\n"
-                        + "===================================================================\n"
+            expected = "diff --git test test\n"
+                        + "Index: test\n"
                         + "--- test\theader1\n"
                         + "+++ test\theader2\n"
                         + "@@ -1,4 +1,5 @@\n"
@@ -131,8 +131,8 @@ namespace CSharpDiff.Tests
         public void ShouldHandleNoNewLineNewEOF()
         {
             var patch = new Patch();
-            var expected = "Index: test\n"
-                            + "===================================================================\n"
+            var expected = "diff --git test test\n"
+                            + "Index: test\n"
                             + "--- test\theader1\n"
                             + "+++ test\theader2\n"
                             + "@@ -1,4 +1,4 @@\n"
@@ -150,8 +150,8 @@ namespace CSharpDiff.Tests
         public void ShouldHandleNoNewLineOldEOF()
         {
             var patch = new Patch();
-            var expected = "Index: test\n"
-                            + "===================================================================\n"
+            var expected = "diff --git test test\n"
+                            + "Index: test\n"
                             + "--- test\theader1\n"
                             + "+++ test\theader2\n"
                             + "@@ -1,4 +1,4 @@\n"
@@ -169,8 +169,8 @@ namespace CSharpDiff.Tests
         public void ShouldHandleNoNewLineContextMissing()
         {
             var patch = new Patch();
-            var expected = "Index: test\n"
-                            + "===================================================================\n"
+            var expected = "diff --git test test\n"
+                            + "Index: test\n"
                             + "--- test\theader1\n"
                             + "+++ test\theader2\n"
                             + "@@ -1,4 +1,4 @@\n"
@@ -188,8 +188,8 @@ namespace CSharpDiff.Tests
         public void ShouldOutPutNoNewLineOnEmpty()
         {
             var patch = new Patch();
-            var expected = "Index: test\n"
-                            + "===================================================================\n"
+            var expected = "diff --git test test\n"
+                            + "Index: test\n"
                             + "--- test\theader1\n"
                             + "+++ test\theader2\n"
                             + "@@ -0,0 +1,4 @@\n"
@@ -206,8 +206,8 @@ namespace CSharpDiff.Tests
         public void ShouldNotOutputNoNewLineWhenEofOutsideHunk()
         {
             var patch = new Patch();
-            var expected = "Index: test\n"
-                            + "===================================================================\n"
+            var expected = "diff --git test test\n"
+                            + "Index: test\n"
                             + "--- test\theader1\n"
                             + "+++ test\theader2\n"
                             + "@@ -1,5 +1,5 @@\n"
@@ -225,8 +225,8 @@ namespace CSharpDiff.Tests
         public void ShouldGeneratePatchDefaultContextSize()
         {
             var patch = new Patch();
-            var expected = "Index: testFileName\n"
-                            + "===================================================================\n"
+            var expected = "diff --git testFileName testFileName\n"
+                            + "Index: testFileName\n"
                             + "--- testFileName\tOld Header\n"
                             + "+++ testFileName\tNew Header\n"
                             + "@@ -1,5 +1,6 @@\n"
@@ -283,8 +283,8 @@ namespace CSharpDiff.Tests
             {
                 Context = 0
             });
-            var expected = "Index: testFileName\n"
-                            + "===================================================================\n"
+            var expected = "diff --git testFileName testFileName\n"
+                            + "Index: testFileName\n"
                             + "--- testFileName\tOld Header\n"
                             + "+++ testFileName\tNew Header\n"
                             + "@@ -1,1 +1,2 @@\n"
@@ -312,8 +312,8 @@ namespace CSharpDiff.Tests
             {
                 Context = 2
             });
-            var expected = "Index: testFileName\n"
-                            + "===================================================================\n"
+            var expected = "diff --git testFileName testFileName\n"
+                            + "Index: testFileName\n"
                             + "--- testFileName\tOld Header\n"
                             + "+++ testFileName\tNew Header\n"
                             + "@@ -1,3 +1,4 @@\n"
@@ -356,8 +356,8 @@ namespace CSharpDiff.Tests
         public void ShouldOutputHeadersOnlyForIdentical()
         {
             var patch = new Patch();
-            var expected = "Index: testFileName\n"
-                            + "===================================================================\n"
+            var expected = "diff --git testFileName testFileName\n"
+                            + "Index: testFileName\n"
                             + "--- testFileName\tOld Header\n"
                             + "+++ testFileName\tNew Header\n";
             var res = patch.create("testFileName", "testFileName", oldFile, oldFile, "Old Header", "New Header");
@@ -368,8 +368,8 @@ namespace CSharpDiff.Tests
         public void ShouldOmitHeadersIfEmpty()
         {
             var patch = new Patch();
-            var expected = "Index: testFileName\n"
-                            + "===================================================================\n"
+            var expected = "diff --git testFileName testFileName\n"
+                            + "Index: testFileName\n"
                             + "--- testFileName\n"
                             + "+++ testFileName\n";
             var res = patch.create("testFileName", "testFileName", oldFile, oldFile, null, null);
@@ -380,8 +380,8 @@ namespace CSharpDiff.Tests
         public void ShouldHandleEmpty()
         {
             var patch = new Patch();
-            var expected = "Index: testFileName\n"
-                            + "===================================================================\n"
+            var expected = "diff --git testFileName testFileName\n"
+                            + "Index: testFileName\n"
                             + "--- testFileName\n"
                             + "+++ testFileName\n";
             var res = patch.create("testFileName", "testFileName", "", "", null, null);
@@ -392,7 +392,7 @@ namespace CSharpDiff.Tests
         public void ShouldOmitIndexDifferentFilenames()
         {
             var patch = new Patch();
-            var expected = "===================================================================\n"
+            var expected = "diff --git foo bar\n"
                             + "--- foo\n"
                             + "+++ bar\n";
             var res = patch.create("foo", "bar", "", "", null, null);
@@ -406,8 +406,8 @@ namespace CSharpDiff.Tests
             {
                 IgnoreWhiteSpace = false
             });
-            var expected = "Index: testFileName\n"
-                            + "===================================================================\n"
+            var expected = "diff --git testFileName testFileName\n"
+                            + "Index: testFileName\n"
                             + "--- testFileName\n"
                             + "+++ testFileName\n"
                             + "@@ -1,2 +1,2 @@\n"
@@ -428,8 +428,8 @@ namespace CSharpDiff.Tests
             {
                 IgnoreWhiteSpace = true
             });
-            var expected = "Index: testFileName\n"
-                            + "===================================================================\n"
+            var expected = "diff --git testFileName testFileName\n"
+                            + "Index: testFileName\n"
                             + "--- testFileName\n"
                             + "+++ testFileName\n";
             var res = patch.create("testFileName", "testFileName", "line   \n line", "line\nline", null, null);
@@ -443,8 +443,8 @@ namespace CSharpDiff.Tests
             {
                 NewlineIsToken = false
             });
-            var expected = "Index: testFileName\n"
-                            + "===================================================================\n"
+            var expected = "diff --git testFileName testFileName\n"
+                            + "Index: testFileName\n"
                             + "--- testFileName\n"
                             + "+++ testFileName\n"
                             + "@@ -1,2 +1,2 @@\n"
@@ -466,8 +466,8 @@ namespace CSharpDiff.Tests
             {
                 NewlineIsToken = true
             });
-            var expected = "Index: testFileName\n"
-                            + "===================================================================\n"
+            var expected = "diff --git testFileName testFileName\n"
+                            + "Index: testFileName\n"
                             + "--- testFileName\n"
                             + "+++ testFileName\n"
                             + "@@ -1,3 +1,3 @@\n"
